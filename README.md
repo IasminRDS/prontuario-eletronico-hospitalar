@@ -1,5 +1,12 @@
 # Prontuário Eletrônico Hospitalar (PE-E2 / SNPE)
 
+[![backend-ci](https://github.com/IasminRDS/prontuario-eletronico-hospitalar/actions/workflows/ci.yml/badge.svg)](https://github.com/IasminRDS/prontuario-eletronico-hospitalar/actions/workflows/ci.yml)
+![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?logo=nestjs&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
+![FHIR R4](https://img.shields.io/badge/FHIR-R4-E36002)
+![License](https://img.shields.io/badge/licen%C3%A7a-MIT-blue)
+
 Plataforma de **prontuário eletrônico hospitalar** estilo SUS. Monorepo com **API NestJS** e **frontend Next.js**, cobrindo o fluxo clínico real (chegada → triagem/fila → atendimento → exames → prescrição → internação → evolução → alta), com **RBAC granular por permissão**, **multi-tenancy** (multi-hospital), **auditoria LGPD transacional**, Outbox/eventos e interoperabilidade **FHIR R4**.
 
 > Integração **100% real** entre frontend e backend (`/api/v1`) — sem mocks. O fluxo clínico completo já foi validado ponta a ponta (login → alta) via HTTP e via navegador.
@@ -15,7 +22,7 @@ Plataforma de **prontuário eletrônico hospitalar** estilo SUS. Monorepo com **
 - [Autenticação e RBAC](#autenticação-e-rbac)
 - [Fluxos clínicos](#fluxos-clínicos)
 - [Camada clínica do frontend (React Query)](#camada-clínica-do-frontend-react-query)
-- [Screenshots](#screenshots)
+- [Documentação](#documentação)
 - [Deploy](#deploy)
 
 ---
@@ -178,13 +185,19 @@ O `QueryClient` (em `app/providers.tsx`) **não re-tenta em erros 4xx** (respost
 
 ---
 
-## Screenshots
+## Documentação
 
-> _Placeholders — substitua pelas capturas reais em `docs/screenshots/`._
+A pasta [`docs/`](docs/) traz o detalhamento que não cabe aqui:
 
-| Login | Pronto-Socorro (fila + atendimento) | Internação (leitos) |
-|-------|-------------------------------------|---------------------|
-| ![Login](docs/screenshots/login.png) | ![Pronto-Socorro](docs/screenshots/pronto-socorro.png) | ![Internação](docs/screenshots/internacao.png) |
+| Documento | Conteúdo |
+|---|---|
+| [VISAO-GERAL.md](docs/VISAO-GERAL.md) | O problema, o recorte do sistema e as decisões de produto |
+| [ARQUITETURA-SNPE.md](docs/ARQUITETURA-SNPE.md) | Multi-tenancy, camadas, Outbox e modelo de eventos |
+| [API.md](docs/API.md) | Contrato dos endpoints do `/api/v1` |
+| [BASE-LEGAL-LGPD.md](docs/BASE-LEGAL-LGPD.md) | Base legal do tratamento e desenho da auditoria |
+| [SECURITY.md](docs/SECURITY.md) | Modelo de ameaças, autenticação e RBAC |
+| [DEPLOY.md](docs/DEPLOY.md) · [OPERACOES.md](docs/OPERACOES.md) | Publicação, migrations e rotina de operação |
+| [HOMOLOGACAO.md](docs/HOMOLOGACAO.md) · [FASE5-VALIDACAO-E2E.md](docs/FASE5-VALIDACAO-E2E.md) | Roteiro de validação ponta a ponta |
 
 ---
 
