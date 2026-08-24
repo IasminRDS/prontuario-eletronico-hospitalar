@@ -41,9 +41,14 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: package-lock.json
 
+      # Monorepo com npm workspaces: o lockfile é o da raiz e cobre backend e
+      # frontend. Instalar de dentro de backend/ usava um package-lock.json
+      # residual, anterior aos workspaces e fora de sincronia com o
+      # package.json — era o que quebrava o `npm ci`.
       - name: Install (lockfile-strict)
+        working-directory: .
         run: npm ci
 
       - name: Prisma generate + migrate
