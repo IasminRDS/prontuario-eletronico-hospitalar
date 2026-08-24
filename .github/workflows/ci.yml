@@ -2,12 +2,15 @@ name: backend-ci
 
 # Garante que o que roda em produção é EXATAMENTE o que está no código:
 # todo push/PR compila, testa (unit + e2e com Postgres real) e builda a imagem.
+# Sem filtro de paths de propósito: o build-test é check obrigatório para dar
+# merge na main, e um check só é reportado se o workflow disparar. Com o filtro
+# antigo, uma PR que mexesse apenas em README ou no frontend nunca reportava o
+# build-test e ficava travada em "waiting for status to be reported". O repo é
+# público, então minutos de Actions não são limitados.
 on:
   push:
     branches: [main]
-    paths: ['backend/**', '.github/workflows/ci.yml']
   pull_request:
-    paths: ['backend/**', '.github/workflows/ci.yml']
 
 jobs:
   build-test:
