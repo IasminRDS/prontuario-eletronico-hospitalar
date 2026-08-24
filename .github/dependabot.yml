@@ -4,34 +4,14 @@ version: 2
 # `ignore` de major afeta apenas *version-update*; **security updates** (mesmo
 # major, disparados por advisory) continuam sendo abertos normalmente.
 updates:
+  # Uma entrada só para npm: o repositório usa workspaces, então existe um
+  # único package-lock.json (o da raiz) e o Dependabot cuida dos package.json
+  # de backend/ e frontend/ a partir daqui. Entradas separadas para /backend e
+  # /frontend subiam a versão no package.json do workspace sem ter um lock
+  # para atualizar junto — o `npm ci` da raiz ficava fora de sincronia e o CI
+  # quebrava em toda PR automática.
   - package-ecosystem: npm
     directory: "/"
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-    groups:
-      npm-minor-patch:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: npm
-    directory: "/backend"
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-    groups:
-      npm-minor-patch:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: npm
-    directory: "/frontend"
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
