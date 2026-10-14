@@ -16,6 +16,6 @@
     "prisma:seed": "npm run prisma:seed --prefix backend"
   },
   "devDependencies": {
-    "concurrently": "^9.2.4"
+    "concurrently": "^9.2.5"
   }
 }
